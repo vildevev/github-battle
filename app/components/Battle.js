@@ -1,5 +1,19 @@
 var React = require('react');
+var PropTypes = require('react-proptypes'); 
 
+class PlayerInput extends React.Component {
+	render() {
+		return (
+
+		)
+	}
+}
+
+PlayerInput.propTypes = {
+	id: PropTypes.string.isRequired,
+	label: PropTypes.string.isRequired,
+	onSubmit: PropTypes.func.isRequired
+}
 
 class Battle extends React.Component {
 	constructor(props) {
@@ -31,10 +45,18 @@ class Battle extends React.Component {
 			<div>
 				<div className='row'>
 					{!playerOneName && 
-						<PlayerInput />}
+						<PlayerInput 
+							id='playerOne'
+							label='Player One'
+							onSubmit={this.handleSubmit}
+						/>}
 
 					{!playerTwoName &&
-						<PlayerInput />}
+						<PlayerInput
+							id='playerTwo'
+							label='Player Two'
+							onSubmit={this.handleSubmit}
+					 	/>}
 				</div>
 			</div>
 		)
