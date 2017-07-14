@@ -2,9 +2,28 @@ var React = require('react');
 var PropTypes = require('react-proptypes'); 
 
 class PlayerInput extends React.Component {
+	constructor(props) {
+		super(props);
+		
+		this.state = {
+			username: ''
+		}
+	}
 	render() {
 		return (
-
+			<form className='column'>
+				<label className='header' htmlFor='username'>
+					{this.props.label}
+				</label>
+				<input 
+					id='username'
+					placeholder='github username'
+					type='text'
+					autoComplete='off'
+					value={this.state.username}
+					onChange={this.handleChange}
+					/>
+			</form> 
 		)
 	}
 }
