@@ -1,5 +1,5 @@
 var React = require('react');
-var PropTypes = require('react-proptypes'); 
+var PropTypes = require('prop-types'); 
 
 class PlayerInput extends React.Component {
 	constructor(props) {
@@ -8,10 +8,29 @@ class PlayerInput extends React.Component {
 		this.state = {
 			username: ''
 		}
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+	}
+	handleChange(event) {
+		var value = event.target.value;
+
+		this.setState(function () {
+			return {
+				username: value
+			}
+		})
+	}
+	handleSubmit(event) {
+		event.preventDefault();
+
+		this.props.onSubmit(
+			this.props.id,
+			this.state.username
+		)
 	}
 	render() {
 		return (
-			<form className='column'>
+			<form className='column' onSubmit={this.handleSubmit}>
 				<label className='header' htmlFor='username'>
 					{this.props.label}
 				</label>
@@ -22,7 +41,13 @@ class PlayerInput extends React.Component {
 					autoComplete='off'
 					value={this.state.username}
 					onChange={this.handleChange}
-					/>
+				/>
+				<button 
+					className='button'
+					type='submit'
+					disabled={!this.state.username}
+						Submit
+				/>
 			</form> 
 		)
 	}
